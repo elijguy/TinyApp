@@ -5,5 +5,36 @@
 </head>
 <body>
 
+
+
+
+<%if (username === undefined) {%>
+
+
+
+
+<form method="POST" action="/login">
+Enter Username: <input type="text" name="username">
+<input type="submit" value="Sign in">
+</form>
+
+<%} else{%>
+
+
+ <form method="POST" action="/logout">
+<p> Hello <%=username%> </p>
+          <button onclick="location.href;" class="float-left submit-button" >Sign out</button>
+
+  </form>
+
+<%}%>
+
+
+
+
+
+
+
+
 </body>
 </html>
