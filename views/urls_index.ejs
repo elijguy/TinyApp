@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <% include /partials/_header %>
+  </head>
+
+
+
+<body>
+  <ul>
+    <%for (const i in urls) {%>
+      <li><%=urls[i]%> - <%=i%></li>
+    <%}%>
+  </ul>
+
+  <ul>
+    <%for (const i in urls) {%>
+      <form method="POST" action="/urls/<%=i%>/delete">
+        <li><%=urls[i]%> - <%=i%>
+          <a href="/urls/<%=i%>">edit   </a>
+          <button onclick="location.href;" class="float-left submit-button" >Delete</button>
+        </li>
+      </form>
+    <%}%>
+  </ul>
+
+
+
+<a href="">Shorten</a>
+</body>
+</html>
