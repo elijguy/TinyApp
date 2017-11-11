@@ -7,7 +7,14 @@
 
 
 <body>
-  <ul>
+  <%if (cookie === undefined) {%>
+
+
+<%} else{%>
+
+
+
+<ul>
     <%for (const i in urls) {%>
       <li><%=urls[i]%> - <%=i%></li>
     <%}%>
@@ -26,6 +33,9 @@
 
 
 
-<a href="">Shorten</a>
+
+<%}%>
+
+
 </body>
 </html>

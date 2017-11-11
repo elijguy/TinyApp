@@ -6,24 +6,27 @@
 <body>
 
 
-<%if (cookie === undefined) {%>
-<form>
-<a href="/register">Register  </a>
 
 
-<a href="/login">Login   </a>
+
+
+
+
+
+<form method="POST" action="/register">
+Enter Email: <input type="email" name="email">
+Enter Password: <input type="password" name="password">
+<input type="submit" value="register">
 </form>
 
-<%} else{%>
 
 
  <form method="POST" action="/logout">
-<p> Hello <%=user[cookie].email%> </p>
           <button onclick="location.href;" class="float-left submit-button" >Sign out</button>
-
   </form>
 
-<%}%>
+
+
 
 
 
