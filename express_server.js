@@ -15,24 +15,24 @@ function generateRandomString() {
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
+/*
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com",
 
+};*/
+
+
+var urlDatabase = {
+
 };
 
+
+
+
+
 const users = {
-  "userRandomID": {
-    id: "userRandomID",
-    email: "user@example.com",
-    password: "purple-monkey-dinosaur"
-  },
- "user2RandomID": {
-    id: "user2RandomID",
-    email: "user2@example.com",
-    password: "dishwasher-funk"
-  }
+
 }
 
 
@@ -48,6 +48,7 @@ test.push(users[eachID].email);
   let testlen = (test.length)
   let newid = generateRandomString();
   users[newid] = {};
+  urlDatabase[newid] = {};
   users[newid]["id"] = newid;
   users[newid]["email"] = req.body.email;
   users[newid]["password"] = req.body.password;
@@ -127,7 +128,7 @@ res.redirect("/urls");
 
 app.post("/urls/:id",(req, res)=> {
   let smallURL = (req.params.id);
-  urlDatabase[smallURL]= (req.body.updateURL);
+  urlDatabase[(req.cookies["user_id"])][smallURL]= (req.body.updateURL);
   res.redirect("/urls");
 });
 
@@ -138,7 +139,7 @@ app.post("/urls/:id",(req, res)=> {
 app.post("/urls/:id/delete",(req, res)=> {
   let deleteURL = req.params.id;
   let url = `/urls/${deleteURL}/delete`;
-  delete urlDatabase[deleteURL];
+  delete urlDatabase[(req.cookies["user_id"])][deleteURL];
   res.redirect("/urls");
 });
 
@@ -157,7 +158,7 @@ app.get("/urls/new", (req, res) => {
 
 app.get("/u/:shortURL", (req, res) => {
   //console.log(req.body.longURL);
-  let longURL = urlDatabase[req.params.shortURL];
+  let longURL = urlDatabase[(req.cookies["user_id"])][req.params.shortURL];
   res.redirect(301,longURL);
 });
 
@@ -166,7 +167,7 @@ app.post("/urls", (req, res) => {
   //console.log(req.body);  // debug statement to see POST parameters
   let shortURL = generateRandomString();
   let url = `/urls/${shortURL}`;
-  urlDatabase[shortURL] = (req.body.longURL);
+  urlDatabase[(req.cookies["user_id"])][shortURL] = (req.body.longURL);
   res.redirect(url);
 
 });
@@ -176,7 +177,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/urls.json", (req, res) => {
-  res.json(users);
+  //res.json(urlDatabase);
+  res.send(urlDatabase);
+
 });
 
 app.get("/hello", (req, res) => {
@@ -191,7 +194,12 @@ app.get("/urls", (req,res) => {
       urls: urlDatabase,
       user: users
      };
+
+
     res.render("urls_index", templateVars);
+
+
+
 });
 
 app.get("/urls/:id", (req, res) => {
@@ -201,11 +209,22 @@ app.get("/urls/:id", (req, res) => {
     shortURL: req.params.id,
     urlDatabase: urlDatabase
    };
-  res.render("urls_show", templateVars);
-});
+
+
+
+      res.render("urls_show", templateVars);
+
+
+
+  });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
+
+
+
+/*I was not able to complete,
+must clear cookies before using*/
 
 

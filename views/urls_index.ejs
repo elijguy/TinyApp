@@ -15,15 +15,15 @@
 
 
 <ul>
-    <%for (const i in urls) {%>
-      <li><%=urls[i]%> - <%=i%></li>
+    <%for (const i in urls[cookie]) {%>
+      <li><%=urls[cookie][i]%> - <%=i%></li>
     <%}%>
   </ul>
 
   <ul>
-    <%for (const i in urls) {%>
+    <%for (const i in urls[cookie]) {%>
       <form method="POST" action="/urls/<%=i%>/delete">
-        <li><%=urls[i]%> - <%=i%>
+        <li><%=urls[cookie][i]%> - <%=i%>
           <a href="/urls/<%=i%>">edit   </a>
           <button onclick="location.href;" class="float-left submit-button" >Delete</button>
         </li>
