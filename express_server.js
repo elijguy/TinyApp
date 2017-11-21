@@ -166,11 +166,39 @@ app.post("/urls/:id/delete",(req, res)=> {
 
   let url = `/urls/${deleteURL}/delete`;
 
-  delete urlDatabase[(req.cookies["user_id"])][deleteURL];
+console.log('thing', urlDatabase[req.cookies["user_id"]][req.params.id])
 
+
+
+  delete urlDatabase[(req.cookies["user_id"])][deleteURL];
   res.redirect("/urls");
 
+
+
 });
+
+
+app.get("/urls/:id/delete",(req,res)=>{
+
+console.log(req.cookies["user_id"]);
+if(req.cookies["user_id"] === undefined){
+  res.redirect("/login");
+}
+if (urlDatabase[req.cookies["user_id"]][req.params.id] === undefined){
+  res.redirect("/login");
+}else {
+
+  res.redirect("/urls/:id/delete");
+}
+
+
+});
+
+
+
+
+
+
 
 
 app.get("/urls/new", (req, res) => {
@@ -182,16 +210,26 @@ app.get("/urls/new", (req, res) => {
       user:users
 
      };
-
+if (req.cookies["user_id"] === undefined){
+  res.redirect("/login");
+}else{
   res.render("urls_new",templateVars);
+}
 
 });
 
 
 app.get("/u/:shortURL", (req, res) => {
 
-  let longURL = urlDatabase[(req.cookies["user_id"])][req.params.shortURL];
+
+for (var allurl in urlDatabase){
+
+  if(urlDatabase[allurl][req.params.shortURL] !== undefined){
+  let longURL = urlDatabase[allurl][req.params.shortURL];
   res.redirect(301,longURL);
+}
+}
+
 });
 
 
@@ -202,6 +240,7 @@ app.post("/urls", (req, res) => {
   let url = `/urls/${shortURL}`;
 
   urlDatabase[(req.cookies["user_id"])][shortURL] = (req.body.longURL);
+
 
   res.redirect(url);
 
@@ -261,9 +300,11 @@ app.get("/urls/:id", (req, res) => {
 
    };
 
-
-res.render("urls_show", templateVars);
-
+if(urlDatabase[req.cookies["user_id"]][req.params.id] === undefined){
+  res.redirect("/login");
+}else {
+  res.render("urls_show", templateVars);
+}
   });
 
 
