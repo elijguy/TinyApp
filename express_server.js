@@ -1,5 +1,7 @@
 var express = require("express");
 
+const bcrypt = require('bcrypt');
+
 var app = express();
 
 var cookieParser = require('cookie-parser');
@@ -64,7 +66,10 @@ app.post("/register",(req,res)=> {
 
   users[newid]["email"] = req.body.email;
 
-  users[newid]["password"] = req.body.password;
+  const password = req.body.password;
+  const hashedpassword = bcrypt.hashSync(password,10);
+
+  users[newid]["password"] = hashedpassword;
 
   tester = users[newid]["email"];
 
@@ -126,12 +131,12 @@ app.post("/login",(req,res)=>{
     if(users[checkId].email === req.body.email) {
 
       for(const checkpass in users) {
-
-        if(users[checkpass].password === req.body.password) {
-
+//IM UP TO THIS POINT
+/*console.log(bcrypt.hashSync(req.body.password,10));*/
+        if(bcrypt.compareSync(req.body.password, users[checkpass].password)){
           set = users[checkpass].id;
-
         }
+
       }
     }
   }
@@ -256,7 +261,7 @@ app.get("/", (req, res) => {
 
 app.get("/urls.json", (req, res) => {
 
-  res.send(urlDatabase);
+  res.send(users);
 
 });
 
