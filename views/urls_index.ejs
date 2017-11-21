@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<% include /partials/_header %>
+  <% include /partials/_header %>
 </head>
 <body>
-<%if (cookie === undefined) {%>
-<%} else{%>
-<ul>
-<%for (const i in urls[cookie]) {%>
-<li><%=urls[cookie][i]%> - <%=i%></li>
-<%}%>
-</ul>
-<ul>
-<%for (const i in urls[cookie]) {%>
-<form method="POST" action="/urls/<%=i%>/delete">
-<li><%=urls[cookie][i]%> - <%=i%>
-<a href="/urls/<%=i%>">edit   </a>
-<button onclick="location.href;" class="float-left submit-button" >Delete</button>
-</li>
-</form>
-<%}%>
-</ul>
-<a href="/urls/new">New Link</a>
-<a href="/urls">Home</a>
-<%}%>
+  <%if (cookie === undefined) {%>
+  <%} else{%>
+    <ul>
+      <%for (const i in urls[cookie]) {%>
+        <li><%=urls[cookie][i]%> - <%=i%></li>
+      <%}%>
+    </ul>
+    <ul>
+      <%for (const i in urls[cookie]) {%>
+        <form method="POST" action="/urls/<%=i%>/delete">
+          <li><%=urls[cookie][i]%> - <%=i%>
+            <a href="/urls/<%=i%>">edit   </a>
+            <button onclick="location.href" class="float-left submit-button" >Delete</button>
+          </li>
+        </form>
+      <%}%>
+    </ul>
+    <a href="/urls/new">New Link</a>
+    <a href="/urls">Home</a>
+  <%}%>
 </body>
 </html>
