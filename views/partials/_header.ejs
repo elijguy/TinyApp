@@ -4,30 +4,16 @@
   <title>TinyApp</title>
 </head>
 <body>
-
-
-<%if (cookie === undefined) {%>
-<form>
-<a href="/register">Register  </a>
-
-
-<a href="/login">Login   </a>
-</form>
-
-<%} else{%>
-
-
- <form method="POST" action="/logout">
-<p> Hello <%=user[cookie].email%> </p>
-          <button onclick="location.href;" class="float-left submit-button" >Sign out</button>
-
-  </form>
-
-<%}%>
-
-
-
-
-
+  <%if (cookie === undefined) {%>
+    <form>
+      <a href="/register">Register  </a>
+      <a href="/login">Login   </a>
+    </form>
+  <%} else{%>
+    <form method="POST" action="/logout">
+      <p> Hello <%=user[cookie].email%> </p>
+      <button onclick="location.href;" class="float-left submit-button" >Sign out</button>
+    </form>
+  <%}%>
 </body>
 </html>
