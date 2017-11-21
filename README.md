@@ -2,11 +2,15 @@
 TinyApp is a full stack web application build with Node and Express
 that allows users to shorten long URLs (a la bit.ly).
 
-##Final Product
+## Final Product
+
+Login page
 !["Login/register"](https://github.com/elijguy/TinyApp/blob/master/docs/loginregister.png?raw=true)
+
+Logged in with links already made
 !["New/Edit/Delete URL"](https://github.com/elijguy/TinyApp/blob/master/docs/signedinwithlinks.png?raw=true)
 
-##Dependencies
+## Dependencies
 
 -Node.js
 -Express
@@ -15,7 +19,7 @@ that allows users to shorten long URLs (a la bit.ly).
 -body-parser
 -cookie-session
 
-##Getting Started
+## Getting Started
 
 -Install all dependencies (using the npm install command)
 -Delete cookies.
